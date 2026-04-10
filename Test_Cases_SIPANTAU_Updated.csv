@@ -1,0 +1,62 @@
+"ID Test Case","Modul","Fitur / Deskripsi","Pre-kondisi","Langkah-Langkah","Hasil yang Diharapkan","Status","Catatan"
+"TC-001","Public","Akses Landing Page","Tidak sedang login","1. Buka URL aplikasi (/)","Halaman awal SIPANTAU tampil dengan baik tanpa error","",""
+"TC-002","Autentikasi","Login Kasubag PK","Akun Kasubag PK terdaftar di database","1. Buka halaman /login
+2. Masukkan email & password Kasubag PK
+3. Klik tombol Login","Berhasil login, diarahkan ke Dashboard Kasubag PK","",""
+"TC-003","Autentikasi","Login PPTK","Akun PPTK terdaftar di database","1. Buka halaman /login
+2. Masukkan email & password PPTK
+3. Klik tombol Login","Berhasil login, diarahkan ke Halaman SPJ PPTK","",""
+"TC-004","Autentikasi","Login Kredensial Salah","Sistem berjalan normal","1. Buka halaman /login
+2. Masukkan email atau password yang salah
+3. Klik Login","Gagal login, muncul pesan error kredensial tidak valid","",""
+"TC-005","Autentikasi","Proteksi Akses Tanpa Login","Tidak sedang login","1. Akses URL /superadmin/dashboard","Akses ditolak, pengguna diarahkan paksa ke halaman login","",""
+"TC-006","Autentikasi","Logout Pengguna","Pengguna sedang dalam kondisi login","1. Klik tombol/menu Logout di navbar","Sesi diakhiri, diarahkan ke halaman landing/login","",""
+"TC-007","Dashboard","Dashboard Superadmin/Kasubag","Login sebagai Superadmin atau Kasubag PK","1. Buka menu Dashboard","Muncul grid statistik total SPJ (belum divalidasi, sudah, perlu perbaikan)","",""
+"TC-008","Dashboard","Filter Bulan pada Dashboard","Terdapat data SPJ, Login sebagai Kasubag PK/Camat/SA","1. Buka Dashboard
+2. Pilih Bulan pada form filter
+3. Klik Tampilkan","Statistik angka rincian otomatis terupdate berdasarkan parameter bulan terpilih","",""
+"TC-009","Manajemen Tahun","Tambah Tahun","Login sebagai Superadmin","1. Buka menu Tahun
+2. Ketik input Tahun baru
+3. Simpan","Tahun baru sukses tersimpan ke DB","",""
+"TC-010","Manajemen Tahun","Set Default Tahun","Login sebagai Superadmin, minimal 2 tahun","1. Buka menu Tahun
+2. Klik tombol Set Default pada list tahun yang dipilah","Tahun aktif berubah. Filter dashboard dan dropdown data master terikat pada tahun terpilih","",""
+"TC-011","User Management","Tambah, Edit, Hapus User","Login sebagai Superadmin","1. Ke menu Manajemen User
+2. Klik Tambah, isi data user baru, simpan
+3. Klik Edit untuk salah satu user, simpan
+4. Klik Hapus","Proses berjalan sesuai Role-based Access tanpa error","","Ubah jadi 4 role"
+"TC-012","Data Master (Program)","Tambah, Ubah, Hapus Program","Login sebagai Superadmin / Kasubag PK","1. Ke menu Master Data -> Program
+2. Tambah data lalu Simpan
+3. Ubah lalu Simpan, Hapus data","Proses CRUD Program berjalan dengan baik & tersambung ke Data Tahun","",""
+"TC-013","Data Master (Kegiatan)","Tambah, Ubah, Hapus Kegiatan","Terdapat min 1 Program. Login SA / Kasubag PK","1. Ke menu Master -> Kegiatan
+2. Tambah data (Pilih Program relasi) lalu Simpan
+3. Ubah dan Hapus","Data Kegiatan berhasil dikelola & relasi Parent (Program) sesuai","",""
+"TC-014","Data Master (Subkegiatan)","Tambah, Ubah, Hapus Subkegiatan","Terdapat min 1 Kegiatan. Login SA / Kasubag PK","1. Ke menu Master -> Subkegiatan
+2. Tambah data (Pilih Kegiatan terkait) lalu Simpan
+3. Ubah dan Hapus","Data Subkegiatan berhasil dikelola sesuai relasi dari Kegiatan terkait","",""
+"TC-015","Import Master Data","Upload File CSV/Excel Valid","File CSV menggunakan format sesuai template relasi","1. Ke menu Import
+2. Pilih file CSV
+3. Klik Import","Sistem memproses baris program, kegiatan, dan subkegiatan otomatis","","Penanganan koma terselesaikan"
+"TC-016","Import Master Data","Upload File CSV Format Salah","File yg dipilih bukan format yg benar atau ekstensi salah","1. Buka Import
+2. Pilih File PDF / File TXT acak
+3. Import","Fitur menolak berkas dengan pesan validasi file import gagal.","",""
+"TC-017","Dokumen SPJ (PPTK)","Tambah (Upload) SPJ Baru","Login sebagai PPTK","1. Ke menu Dokumen SPJ -> Tambah SPJ
+2. Pilih Program -> Kegiatan -> Subkegiatan
+3. Upload Lampiran File (PDF/ZIP), isi uraian
+4. Simpan","File terunggah, Document baru muncul di tabel dengan status 'Belum Divalidasi'","","Dropdown Load Ajax"
+"TC-018","Dokumen SPJ","Hak Akses List SPJ (Semua vs PPTK)","Sistem berisi dokumen dari beberapa PPTK berbeda","1. Login PPTK A, buka Dokumen SPJ
+2. Login Camat/SA, buka Dokumen SPJ","PPTK A hanya melihat dokumen miliknya, Camat/SA/Kasubag melihat seluruh dokumen","","Validasi RBAC"
+"TC-019","Validasi SPJ (Kasubag PK)","Approval (Setujui) SPJ","Login sebagai Kasubag PK, Ada SPJ 'Belum Divalidasi'","1. Ke menu Dokumen SPJ
+2. Tabel baris terkait -> Pilih Aksi Validasi
+3. Set status jadi 'Sudah Divalidasi' -> Simpan","Badge SPJ pada tabel berubah warna & status menjadi 'Sudah Divalidasi'","",""
+"TC-020","Validasi SPJ (Kasubag PK)","Tolak (Perlu Perbaikan) SPJ","Login sebagai Kasubag PK, Ada SPJ 'Belum Divalidasi'","1. Ke menu Dokumen SPJ
+2. Klik Validasi -> Set status jadi 'Perlu Perbaikan'
+3. Isi Catatan (alasan kesalahan) -> Simpan","Status dokumen menjadi 'Perlu Perbaikan', catatan tersimpan dan bisa diakses pembuat SPJ","",""
+"TC-021","Dokumen SPJ (PPTK)","Perbaiki / Re-upload Dokumen (Revisi)","Login PPTK, terdapat Dokumen 'Perlu Perbaikan'","1. Pada baris dokumen yang ditolak, klik tombol Perbaiki
+2. Upload file baru, tekan Simpan","Dokumen terbaru diunggah menimpa yang lama, status kembali di-reset jadi 'Belum Divalidasi'","",""
+"TC-022","Dokumen SPJ","Download SPJ Personal Tunggal","Terdapat SPJ pada list Dokumen","1. Buka tabel SPJ
+2. Klik tombol Download pada tautan/aksi baris tabel","Sistem melayani unduhan lampiran spesifik dari SPJ tersebut","",""
+"TC-023","Dokumen SPJ","Download ZIP Massal (Bulk)","Login SA/Kasubag PK/Camat. Terdapat SPJ pada Tahun saat ini","1. Di list dokumen SPJ, klik tombol massal Download Semua (ZIP)","Terunduh zip berisi arsip dokumen SPJ yg dimaping otomatis dalam folder hirarki","","Pemisahan folder terintegrasi"
+"TC-024","API / AJAX","Filter Kegiatan berdasarkan Program","Form Tambah SPJ","1. Buka form SPJ
+2. Pilih/ubah opsi Program pada dropdown pilihan","Dropdown Kegiatan secara dinamis mem-fetch & menampilkan hanya milik Program terkait","",""
+"TC-025","API / AJAX","Filter Subkegiatan berdasar Kegiatan","Form Tambah SPJ","1. Buka form SPJ
+2. Pilih/Ubah Kegiatan pada dropdown","Dropdown Subkegiatan meload & menampilkan hanya dari Kegiatan target secara responsif","",""

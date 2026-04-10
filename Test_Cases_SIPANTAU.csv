@@ -1,0 +1,53 @@
+sep=;
+"Test ID";"Modul";"Fitur";"Deskripsi Pengujian";"Pre-Kondisi";"Langkah-Langkah";"Ekspektasi Hasil";"Status Validasi"
+"TC_PUB_01";"Public";"Landing Page";"Memastikan landing page dapat diakses publik";"Tanpa login";"1. Buka URL aplikasi (/)";"Halaman awal SIPANTAU tampil dengan baik tanpa error";"[ ] Lulus / [ ] Gagal"
+"TC_AUTH_01";"Autentikasi";"Login Berhasil";"Memastikan login dengan role yang sesuai berhasil";"User terdaftar";"1. Buka /login
+2. Masukkan email & password
+3. Klik Login";"Berhasil masuk ke Dashboard sesuai role";"[ ] Lulus / [ ] Gagal"
+"TC_AUTH_02";"Autentikasi";"Login Gagal";"Memastikan kredensial salah ditolak";"Email/Password salah";"1. Buka /login
+2. Masukkan kombinasi salah
+3. Klik Login";"Muncul alert kredensial tidak valid";"[ ] Lulus / [ ] Gagal"
+"TC_AUTH_03";"Autentikasi";"Logout";"Memastikan fungsi logout sukses";"Sedang login";"1. Klik tombol Logout";"Kembali ke landing/login page";"[ ] Lulus / [ ] Gagal"
+"TC_DASH_01";"Dashboard";"Dashboard Superadmin/Kasubag";"Melihat ringkasan data dan stats validasi";"Role SA/Kasubag";"1. Buka menu Dashboard";"Muncul grid statistik total SPJ: belum divalidasi, sudah divalidasi, dan perlu perbaikan beserta persentase";"[ ] Lulus / [ ] Gagal"
+"TC_DASH_02";"Dashboard";"Filter Bulan";"Mencoba memfilter statistik berdasar bulan di dashboard";"Role SA/Kasubag/Camat, ada SPJ";"1. Buka Dashboard
+2. Pilih Bulan pada form filter
+3. Klik Tampilkan";"Statistik angka otomatis terupdate dan hanya menghitung dokumen yang memiliki tanggal pelaksanaan pada bulan yg dipilih";"[ ] Lulus / [ ] Gagal"
+"TC_TA_01";"Manajemen Tahun";"Tambah Tahun";"Superadmin menambah Tahun Anggaran";"Role SA";"1. Ke menu Tahun
+2. Submit tahun baru";"Tahun sukses tersimpan di DB";"[ ] Lulus / [ ] Gagal"
+"TC_TA_02";"Manajemen Tahun";"Set Default Tahun";"Superadmin memindah Session Tahun";"Role SA, minimal 2 tahun";"1. Ke menu Tahun
+2. Klik Set Default pada tahun yg dituju";"Tahun aktif berubah. Semua data master & SPJ terfilter menyesuaikan tahun ini";"[ ] Lulus / [ ] Gagal"
+"TC_UM_01";"Manajemen User";"CRUD User";"Superadmin melakukan insert, update, dan delete User beserta rolenya";"Role SA";"1. Ke menu Users
+2. Tambah user baru, edit, lalu delete";"Pengguna berhasil dikelola dari tabel dan sistem mencatat sesuai rolenya";"[ ] Lulus / [ ] Gagal"
+"TC_MD_01";"Data Master";"Kelola Program";"Input Program dan pengecekan datanya";"Role SA/Kasubag";"1. Menu Program
+2. Tambah/Edit/Hapus Program";"Program tersimpan sesuai tahun aktif session";"[ ] Lulus / [ ] Gagal"
+"TC_MD_02";"Data Master";"Kelola Kegiatan";"Input Kegiatan dengan relasi Program";"Role SA/Kasubag, minimal ada 1 Program";"1. Menu Kegiatan
+2. Tambah/Edit/Hapus Kegiatan";"Data Kegiatan tersambung dgn Program";"[ ] Lulus / [ ] Gagal"
+"TC_MD_03";"Data Master";"Kelola Subkegiatan";"Input Subkegiatan dengan relasi Kegiatan";"Role SA/Kasubag, minimal ada 1 Kegiatan";"1. Menu Subkegiatan
+2. Tambah/Edit/Hapus Subkegiatan";"Data Subkegiatan tersambung ke Kegiatan";"[ ] Lulus / [ ] Gagal"
+"TC_MD_04";"Data Master";"Import CSV Dokumen Master";"Mengunggah file CSV Master Data hierarchy";"Role SA/Kasubag, File CSV siap";"1. Menu Import
+2. Pilih File CSV sesuai struktur
+3. Submit";"Semua cascade Program - Kegiatan - Subkegiatan terimport masuk ke database secara hirarkis";"[ ] Lulus / [ ] Gagal"
+"TC_SPJ_01";"Dokumen SPJ";"Upload SPJ (PPTK)";"PPTK mengunggah SPJ lampiran";"Role PPTK";"1. Buka menu Dokumen SPJ
+2. Klik Tambah / Upload SPJ
+3. Isi kolom Subkegiatan, File, Tanggal Pelaksanaan
+4. Simpan";"Data SPJ sukses terunggah dengan status 'belum_divalidasi'";"[ ] Lulus / [ ] Gagal"
+"TC_SPJ_02";"Dokumen SPJ";"Hak Akses Tabel SPJ";"Mengecek otorisasi melihat data dokumen SPJ berdasar role";"Sistem terisi beberapa dokumen dari PPTK berbeda";"1. Login sebagai Camat
+2. Login PPTK A
+3. Buka menu Dokumen SPJ";"Camat/SA/Kasubag melihat seluruh data, namun PPTK A hanya melihat dokumen miliknya sendiri";"[ ] Lulus / [ ] Gagal"
+"TC_SPJ_03";"Dokumen SPJ";"Validasi: Disetujui";"Kasubag memvalidasi SPJ menyetujuinya";"Role Kasubag PK, ada SPJ baru";"1. Buka Dokumen SPJ
+2. Klik tombol Aksi Validasi -> Set 'Sudah Divalidasi'
+3. Simpan";"Badge SPJ berubah warna dan label menjadi Sudah Divalidasi";"[ ] Lulus / [ ] Gagal"
+"TC_SPJ_04";"Dokumen SPJ";"Validasi: Perlu Perbaikan";"Kasubag meminta PPTK merevisi dengan menyertakan catatan";"Role Kasubag PK, ada SPJ";"1. Buka Dokumen SPJ
+2. Aksi Validasi -> Set 'Perlu Perbaikan'
+3. Isi catatan revisi di kolom teks
+4. Simpan";"Badge SPJ jadi kuning (Perlu Perbaikan) beserta alasannya bisa dibaca PPTK";"[ ] Lulus / [ ] Gagal"
+"TC_SPJ_05";"Dokumen SPJ";"Revisi SPJ (Perbaiki)";"PPTK meng-upload ulang respon revisi dokumen";"Role PPTK, di tabel ada SPJ yg perlu revisi";"1. Buka list Dokumen SPJ
+2. Klik tombol aksi 'Perbaiki'
+3. Upload file pengganti -> Submit";"Data file SPJ terupdate dengan file baru, dan form status otomatis kembali jadi 'Belum Divalidasi'";"[ ] Lulus / [ ] Gagal"
+"TC_DL_01";"Fitur Unduh";"Download Lampiran SPJ (Terapisah)";"Mengunduh lampiran spesifik per baris tabel";"Login dari Role manapun, Ada SPJ siap diunduh";"1. Buka list SPJ di tabel
+2. Klik tombol Aksi Download";"Sistem mengirimkan return file lampiran itu untuk diunduh / ditampilkan browser";"[ ] Lulus / [ ] Gagal"
+"TC_DL_02";"Fitur Unduh";"Download ZIP Bulk";"Mencoba Bulk Zip Export (Download Semua SPJ di Tahun tsb)";"Role SA/Kasubag/Camat";"1. Menu Dokumen SPJ
+2. Klik tombol mass action 'Download Semua (ZIP)'";"Terunduh ZIP file di mana isinya otomatis dipisahkan jadi map folder: (Program > Kegiatan > Subkegiatan)";"[ ] Lulus / [ ] Gagal"
+"TC_CASC_01";"Routing & API";"Cascading Dropdown Data Ajax";"Memastikan dropdown form bereaksi pada relasinya lewat API request";"Buka form Tambah Dokumen SPJ / Data Master";"1. Pilih Dropdown Program
+2. Cek pilihan Dropdown Kegiatan
+3. Pilih Kegiatan -> Cek Dropdown Sub";"Pilihan yg muncul dikalkulasi secara fetch API dari endpoint /kegiatans/{id} & /subkegiatans/{id}";"[ ] Lulus / [ ] Gagal"
