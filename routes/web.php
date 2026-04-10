@@ -63,6 +63,8 @@ Route::middleware(['auth', 'role:superadmin,kasubag_pk'])->prefix('superadmin')-
 // ============================
 Route::middleware(['auth', 'role:kasubag_pk'])->prefix('kasubag')->name('kasubag.')->group(function () {
     Route::get('/dokumen', [DokumenSpjController::class, 'index'])->name('dokumen.index');
+    Route::get('/dokumen/{dokumen}/validasi', [DokumenSpjController::class, 'showValidasi'])->name('dokumen.validasi');
+    Route::put('/dokumen/{dokumen}/validasi', [DokumenSpjController::class, 'updateValidasi'])->name('dokumen.validasi.update');
 });
 
 // ============================

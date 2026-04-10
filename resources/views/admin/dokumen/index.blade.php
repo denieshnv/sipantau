@@ -76,7 +76,7 @@
                 @forelse($dokumens as $i => $dokumen)
                 <tr>
                     <td>{{ $dokumens->firstItem() + $i }}</td>
-                    @if(auth()->user()->isSuperadmin())
+                    @if(auth()->user()->canViewAllDocuments())
                     <td>
                         <span class="fw-semibold">{{ $dokumen->user->name ?? '-' }}</span>
                     </td>

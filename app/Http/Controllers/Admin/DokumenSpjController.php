@@ -284,10 +284,8 @@ class DokumenSpjController extends Controller
 
         $statusLabel = $dokumen->status_label;
 
-        // Redirect sesuai role
-        $routeName = Auth::user()->isSuperadmin() ? 'superadmin.dokumen.index' : 'kasubag.dokumen.index';
-
-        return redirect()->route($routeName)
+        // Redirect ke halaman dokumen (shared route untuk superadmin & kasubag_pk)
+        return redirect()->route('superadmin.dokumen.index')
             ->with('success', "Dokumen SPJ berhasil diubah statusnya menjadi \"{$statusLabel}\".");
     }
 
